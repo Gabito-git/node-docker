@@ -1,0 +1,28 @@
+version: "3"
+services: 
+    nginx:
+        ports: 
+            - "3000:80"
+    node-app:
+        build:
+            context: .
+            args:
+                NODE_ENV: development
+        volumes:
+            - ./:/app
+            - /app/node_modules
+        environment:
+            - NODE_ENV=development
+            - MONGO_USER=gabriel
+            - MONGO_PASSWORD=mypassword
+            - SESSION_SECRET=P@labra_Secr3ta
+        command: npm run dev
+    mongo:
+        ## esto quiere decir que no se va a customizar una imagen mediante un build
+        ## de un Dockerfile si no que se va a tomar la imagen tal como viene
+        ports:
+            - "27017:27017"
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=gabriel
+            - MONGO_INITDB_ROOT_PASSWORD=mypassword
+   

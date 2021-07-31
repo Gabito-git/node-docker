@@ -1,0 +1,20 @@
+
+# En esta dirección se pueden verificar las caracteristicas de las diferentes versiones de docker-compose
+# https://docs.docker.com/compose/compose-file/
+version: "3"
+# Services se refiere a contenedores
+services:
+    node-app:
+        # El punto significa el directorio actual de Dockerfile, en este caso, el directorio raiz
+        build: .
+        ports:
+            - "3000:3000"
+        # MEdiandte docker-compose se usa el path relativo al directorio local (./)
+        volumes:
+            - ./:/app:ro
+            - /app/node_modules
+        environment:
+            - PORT=3000
+        # Pasando un archivo:
+        # env_file:
+        #     - ./.env

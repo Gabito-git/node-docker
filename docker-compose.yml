@@ -1,0 +1,30 @@
+version: "3"
+services: 
+    nginx: 
+        image: nginx:stable-alpine   
+        ports:
+            - "3000:80"
+        volumes:
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro    
+    node-app:
+        build: .
+        # ports:
+        #     - "3000:3000"
+        environment:
+            - PORT=3000
+        depends_on:
+            - mongo
+
+    mongo:
+        ## esto quiere decir que no se va a customizar una imagen mediante un build
+        ## de un Dockerfile si no que se va a tomar la imagen tal como viene
+        
+        image: mongo  
+        volumes:
+            - mongo-db:/data/db
+
+    redis: 
+        image: redis
+        
+volumes:
+    mongo-db:
