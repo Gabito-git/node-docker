@@ -57,7 +57,7 @@ app.use( express.json() );
 
 app.get("/api/v1/", (req, res) => {
     console.log("Yeah it ran");
-    res.send("<h1> Hi there WORLD </h1>");
+    res.send("<h1> Probando automatización  </h1>");
 })
 
 app.use( "/api/v1/posts", postRouter );
